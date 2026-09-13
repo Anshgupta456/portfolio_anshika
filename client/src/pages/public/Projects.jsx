@@ -110,7 +110,7 @@ export default function Projects() {
             {/* Headline Section */}
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
               <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-teal-200 bg-teal-50/60 text-[#367C8E] text-xs font-mono font-medium tracking-wide mb-3">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#B2D8E2] bg-[#E8F4F7] text-[#367C8E] text-xs font-mono font-medium tracking-wide mb-3">
                   <FolderGit2 size={13} />
                   <span>COMPLETE ARCHIVE</span>
                 </div>
@@ -166,7 +166,7 @@ export default function Projects() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search title, React, Node, AI..."
-                  className="w-full pl-10 pr-4 py-2 bg-white border border-zinc-200 rounded-full text-xs sm:text-sm text-zinc-900 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-[#367C8E] focus:border-transparent transition-all shadow-2xs"
+                  className="w-full pl-10 pr-4 py-2 bg-white border border-zinc-200 rounded-full text-xs sm:text-sm text-zinc-900 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-zinc-950 focus:border-transparent transition-all shadow-2xs"
                 />
                 {searchQuery && (
                   <button
@@ -200,7 +200,7 @@ export default function Projects() {
                     setActiveCategory('All');
                     setSearchQuery('');
                   }}
-                  className="text-xs font-medium text-[#367C8E] hover:underline"
+                  className="text-xs font-medium text-zinc-950 hover:underline"
                 >
                   Reset all filters
                 </button>
@@ -229,7 +229,7 @@ export default function Projects() {
                     setActiveCategory('All');
                     setSearchQuery('');
                   }}
-                  className="mt-5 inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-zinc-950 text-white text-xs font-medium hover:bg-[#367C8E] transition-colors"
+                  className="mt-5 inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-zinc-950 text-white text-xs font-medium hover:bg-zinc-800 transition-colors"
                 >
                   <span>Reset Filters</span>
                 </button>
@@ -239,7 +239,7 @@ export default function Projects() {
             {/* Contact Callout Footer Banner */}
             <div className="mt-16 rounded-3xl bg-gradient-to-r from-zinc-950 via-zinc-900 to-zinc-950 text-white p-8 sm:p-12 relative overflow-hidden shadow-xl">
               <div 
-                className="absolute top-0 right-0 w-96 h-96 bg-[radial-gradient(circle,rgba(54,124,142,0.35)_0%,transparent_70%)] blur-2xl pointer-events-none" 
+                className="absolute top-0 right-0 w-96 h-96 bg-[radial-gradient(circle,rgba(54,124,142,0.3)_0%,transparent_70%)] blur-2xl pointer-events-none" 
                 aria-hidden="true" 
               />
               <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
@@ -257,7 +257,7 @@ export default function Projects() {
                 </div>
                 <Link
                   to="/#contact"
-                  className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-zinc-950 shadow-md hover:bg-[#B2D8E2] hover:text-zinc-950 transition-all duration-300 group shrink-0"
+                  className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-zinc-950 shadow-md hover:bg-[#E8F4F7] hover:text-[#367C8E] transition-all duration-300 group shrink-0"
                 >
                   <span>Get in Touch</span>
                   <ArrowUpRight size={16} strokeWidth={2.4} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

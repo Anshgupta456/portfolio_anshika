@@ -70,7 +70,7 @@ export default function ContactSection() {
   const contactChannels = [
     {
       id: 'email',
-      icon: <Mail size={22} className="text-zinc-600 transition-colors duration-500 group-hover/contact:text-[#367C8E]" />,
+      icon: <Mail size={22} className="text-[#367C8E]" />,
       label: 'EMAIL ADDRESS',
       value: emailAddress,
       href: `mailto:${emailAddress}`,
@@ -95,7 +95,7 @@ export default function ContactSection() {
     },
     {
       id: 'location',
-      icon: <MapPin size={22} className="text-zinc-600 transition-colors duration-500 group-hover/contact:text-[#367C8E]" />,
+      icon: <MapPin size={22} className="text-[#367C8E]" />,
       label: 'LOCATION & TIMEZONE',
       value: locationText,
       subValue: 'IST (UTC +5:30) • Open to Remote & Relocation',
@@ -105,11 +105,11 @@ export default function ContactSection() {
   ];
 
   return (
-    <section id="contact" className="group/contact relative py-20 sm:py-28 bg-white overflow-hidden transition-colors duration-700 select-none">
-      
-      {/* Background shirt-matching teal ambient glow */}
+    <section id="contact" className="relative py-20 sm:py-28 bg-white overflow-hidden select-none">
+
+      {/* Background shirt-matching teal ambient glow (colored by default) */}
       <div 
-        className="absolute top-[20%] left-1/2 -translate-x-1/2 w-[800px] h-[500px] rounded-full bg-[radial-gradient(circle,rgba(178,216,226,0.35)_0%,rgba(232,244,247,0.18)_50%,transparent_85%)] blur-[90px] pointer-events-none opacity-0 scale-90 transition-all duration-700 group-hover/contact:opacity-100 group-hover/contact:scale-100 z-0" 
+        className="absolute top-[20%] left-1/2 -translate-x-1/2 w-[800px] h-[500px] rounded-full bg-[radial-gradient(circle,rgba(178,216,226,0.35)_0%,rgba(232,244,247,0.18)_50%,transparent_85%)] blur-[90px] pointer-events-none opacity-80 z-0" 
         aria-hidden="true" 
       />
 
@@ -131,9 +131,9 @@ export default function ContactSection() {
           </p>
 
           {/* Availability Status Badge */}
-          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-zinc-200 bg-zinc-50 mt-6 shadow-2xs transition-colors duration-500 group-hover/contact:border-[#B2D8E2] group-hover/contact:bg-[#E8F4F7]/40">
+          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-[#B2D8E2] bg-[#E8F4F7]/50 mt-6 shadow-2xs">
             <span className="w-2 h-2 rounded-full bg-emerald-500 ring-4 ring-emerald-500/20" />
-            <span className="font-mono text-xs font-medium text-zinc-800 transition-colors duration-500 group-hover/contact:text-[#367C8E]">
+            <span className="font-mono text-xs font-semibold text-[#367C8E]">
               Available for full-time engineering roles
             </span>
           </div>
@@ -144,19 +144,19 @@ export default function ContactSection() {
           {contactChannels.map((channel) => (
             <div
               key={channel.id}
-              className={`group/card relative rounded-3xl border p-6 flex flex-col justify-between transition-all duration-500 ${
+              className={`group/card relative rounded-3xl border p-6 flex flex-col justify-between transition-all duration-300 ${
                 channel.isPrimary
-                  ? 'bg-white border-zinc-950/20 shadow-md group-hover/contact:border-[#367C8E]/50 group-hover/contact:shadow-lg hover:border-[#367C8E] hover:shadow-xl hover:-translate-y-1'
-                  : 'bg-[#FAFAFA] border-zinc-200/90 shadow-2xs group-hover/contact:border-[#367C8E]/30 hover:bg-white hover:border-[#367C8E] hover:shadow-lg hover:-translate-y-1'
+                  ? 'bg-white border-[#367C8E] shadow-md shadow-[#367C8E]/10 hover:border-[#235B6A] hover:shadow-lg hover:-translate-y-1'
+                  : 'bg-[#FAFAFA] border-[#B2D8E2]/80 shadow-2xs hover:bg-white hover:border-[#367C8E] hover:shadow-md hover:-translate-y-1'
               }`}
             >
               <div>
                 {/* Top Row: Icon badge & Label */}
                 <div className="flex items-center justify-between gap-3 mb-6">
-                  <div className="w-11 h-11 rounded-2xl bg-white border border-zinc-200/80 flex items-center justify-center text-zinc-900 shadow-2xs transition-all duration-500 group-hover/contact:border-[#367C8E]/40 group-hover/contact:text-[#367C8E] group-hover/contact:bg-[#E8F4F7]/30">
+                  <div className="w-11 h-11 rounded-2xl bg-[#E8F4F7] border border-[#B2D8E2] flex items-center justify-center text-[#367C8E] shadow-2xs">
                     {channel.icon}
                   </div>
-                  <span className="font-mono text-[10px] font-bold tracking-wider text-zinc-400 uppercase transition-colors duration-500 group-hover/contact:text-[#367C8E]">
+                  <span className="font-mono text-[10px] font-bold tracking-wider text-[#367C8E] uppercase">
                     {channel.label}
                   </span>
                 </div>
@@ -180,14 +180,14 @@ export default function ContactSection() {
                     href={channel.href}
                     target={channel.href.startsWith('mailto') ? '_self' : '_blank'}
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-zinc-800 transition-colors duration-500 group-hover/contact:text-[#367C8E] hover:underline"
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#367C8E] hover:text-[#235B6A] hover:underline transition-colors"
                   >
                     <span>{channel.actionText}</span>
                     <ArrowUpRight size={13} strokeWidth={2.4} />
                   </a>
                 ) : (
-                  <span className="inline-flex items-center gap-1 text-xs font-semibold text-zinc-600 transition-colors duration-500 group-hover/contact:text-[#367C8E]">
-                    <Globe size={13} className="text-zinc-500 transition-colors duration-500 group-hover/contact:text-[#367C8E]" />
+                  <span className="inline-flex items-center gap-1 text-xs font-semibold text-[#367C8E]">
+                    <Globe size={13} className="text-[#367C8E]" />
                     <span>Active IST</span>
                   </span>
                 )}
@@ -197,7 +197,7 @@ export default function ContactSection() {
                     type="button"
                     onClick={handleCopyEmail}
                     aria-label="Copy email address"
-                    className="inline-flex items-center gap-1 text-xs font-mono text-zinc-500 hover:text-zinc-950 cursor-pointer transition-colors duration-500 group-hover/contact:text-[#367C8E] p-1"
+                    className="inline-flex items-center gap-1 text-xs font-mono text-zinc-600 hover:text-[#367C8E] cursor-pointer transition-colors p-1"
                   >
                     {copiedEmail ? (
                       <>
@@ -289,7 +289,7 @@ export default function ContactSection() {
             <button
               type="submit"
               disabled={submitting}
-              className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-zinc-950 hover:bg-[#367C8E] text-white py-3 px-5 text-sm font-medium shadow-xs transition-all duration-300 disabled:opacity-50 cursor-pointer group"
+              className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-[#367C8E] hover:bg-[#235B6A] text-white py-3 px-5 text-sm font-semibold shadow-md shadow-[#367C8E]/20 transition-all duration-300 disabled:opacity-50 cursor-pointer group"
             >
               {submitting ? (
                 <>

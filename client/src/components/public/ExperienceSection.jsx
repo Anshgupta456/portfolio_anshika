@@ -27,11 +27,11 @@ export default function ExperienceSection() {
   }, [dbExperiences]);
 
   return (
-    <section id="experience" className="group/exp relative py-16 sm:py-24 bg-[#FAFAFA] overflow-hidden transition-colors duration-700 select-none">
-      
-      {/* Background shirt-matching teal ambient glow */}
+    <section id="experience" className="relative py-16 sm:py-24 bg-[#FAFAFA] overflow-hidden select-none">
+
+      {/* Background shirt-matching teal ambient glow (colored by default) */}
       <div 
-        className="absolute top-[20%] left-1/2 -translate-x-1/2 w-[800px] h-[500px] rounded-full bg-[radial-gradient(circle,rgba(178,216,226,0.35)_0%,rgba(232,244,247,0.18)_50%,transparent_85%)] blur-[90px] pointer-events-none opacity-0 scale-90 transition-all duration-700 group-hover/exp:opacity-100 group-hover/exp:scale-100 z-0" 
+        className="absolute top-[20%] left-1/2 -translate-x-1/2 w-[800px] h-[500px] rounded-full bg-[radial-gradient(circle,rgba(178,216,226,0.35)_0%,rgba(232,244,247,0.18)_50%,transparent_85%)] blur-[90px] pointer-events-none opacity-80 z-0" 
         aria-hidden="true" 
       />
 
@@ -53,9 +53,9 @@ export default function ExperienceSection() {
           <button
             type="button"
             onClick={() => setExpandAll(!expandAll)}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-zinc-200 bg-white text-xs font-medium text-zinc-700 shadow-xs transition-all duration-500 group-hover/exp:border-[#367C8E] group-hover/exp:text-[#367C8E] group-hover/exp:shadow-sm cursor-pointer w-fit self-start sm:self-center"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#367C8E] bg-[#E8F4F7]/40 text-xs font-semibold text-[#367C8E] shadow-xs transition-all duration-300 hover:bg-[#367C8E] hover:text-white cursor-pointer w-fit self-start sm:self-center"
           >
-            <Sparkles size={13} className={`transition-colors duration-500 ${expandAll ? 'text-[#367C8E]' : 'text-zinc-400 group-hover/exp:text-[#367C8E]'}`} />
+            <Sparkles size={13} className="text-[#367C8E]" />
             <span>{expandAll ? 'Collapse Details' : 'Expand All Details'}</span>
           </button>
         </div>
@@ -69,7 +69,7 @@ export default function ExperienceSection() {
           
           {/* Continuous Vertical Timeline Spine */}
           <div 
-            className="absolute top-6 bottom-6 left-5 sm:left-6 w-[2px] bg-gradient-to-b from-zinc-300 via-zinc-200 to-transparent z-0 transition-colors duration-500 group-hover/exp:from-[#367C8E]/40 group-hover/exp:via-[#B2D8E2]/50"
+            className="absolute top-6 bottom-6 left-5 sm:left-6 w-[2px] bg-gradient-to-b from-[#367C8E]/50 via-[#B2D8E2]/60 to-transparent z-0"
             aria-hidden="true"
           />
 
@@ -90,11 +90,7 @@ export default function ExperienceSection() {
                   {/* Timeline Node on Spine */}
                   <div className="relative z-10 shrink-0 mt-4">
                     <div 
-                      className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center border-2 transition-all duration-500 ${
-                        isExpanded || isCurrent
-                          ? 'bg-zinc-950 text-white border-zinc-950 shadow-md group-hover/exp:bg-[#367C8E] group-hover/exp:border-[#367C8E] group-hover/exp:shadow-[#367C8E]/30'
-                          : 'bg-white text-zinc-600 border-zinc-300 group-hover/exp:border-[#367C8E] group-hover/exp:text-[#367C8E] group-hover/item:bg-[#367C8E] group-hover/item:text-white'
-                      }`}
+                      className="w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center border-2 bg-[#367C8E] text-white border-[#367C8E] shadow-md shadow-[#367C8E]/25 transition-all duration-300"
                     >
                       <Briefcase size={16} strokeWidth={2.2} />
                     </div>
@@ -102,10 +98,10 @@ export default function ExperienceSection() {
 
                   {/* Compact Card Container */}
                   <div 
-                    className={`flex-1 rounded-2xl sm:rounded-3xl border transition-all duration-500 p-5 sm:p-6 ${
+                    className={`flex-1 rounded-2xl sm:rounded-3xl border transition-all duration-300 p-5 sm:p-6 ${
                       isExpanded
-                        ? 'bg-white border-[#367C8E]/50 shadow-xl shadow-zinc-200/50 -translate-y-0.5'
-                        : 'bg-white/90 border-zinc-200/90 shadow-xs group-hover/exp:border-[#367C8E]/40 hover:bg-white hover:border-[#367C8E]/60 hover:shadow-md'
+                        ? 'bg-white border-[#367C8E] shadow-lg shadow-[#367C8E]/10 -translate-y-0.5'
+                        : 'bg-white/95 border-[#B2D8E2]/80 shadow-xs hover:border-[#367C8E] hover:shadow-md'
                     }`}
                   >
                     
@@ -114,7 +110,7 @@ export default function ExperienceSection() {
                       
                       {/* Left: Number, Role, Company, Type */}
                       <div className="flex items-center gap-3 flex-wrap">
-                        <span className="font-mono text-xs font-bold text-zinc-400 bg-zinc-100 px-2 py-0.5 rounded-md transition-colors duration-500 group-hover/exp:text-[#367C8E] group-hover/exp:bg-[#E8F4F7]">
+                        <span className="font-mono text-xs font-bold text-[#367C8E] bg-[#E8F4F7] px-2 py-0.5 rounded-md">
                           {exp.number}
                         </span>
 
@@ -122,23 +118,23 @@ export default function ExperienceSection() {
                           {exp.role}
                         </h3>
 
-                        <span className="text-sm font-semibold text-zinc-700 transition-colors duration-500 group-hover/exp:text-[#367C8E]">
+                        <span className="text-sm font-semibold text-[#367C8E]">
                           @{exp.company}
                         </span>
 
-                        <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-mono font-medium bg-zinc-100 text-zinc-700 border border-zinc-200/70 transition-colors duration-500 group-hover/exp:border-[#B2D8E2]">
+                        <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-mono font-medium bg-[#E8F4F7]/60 text-[#235B6A] border border-[#B2D8E2]">
                           {exp.type}
                         </span>
                       </div>
 
                       {/* Right: Duration Pill & Expand Hint */}
                       <div className="flex items-center gap-3 self-start sm:self-auto shrink-0">
-                        <div className="inline-flex items-center gap-1.5 font-mono text-[11px] font-semibold text-zinc-800 bg-zinc-50 border border-zinc-200 px-2.5 py-1 rounded-full transition-colors duration-500 group-hover/exp:border-[#B2D8E2] group-hover/exp:bg-[#E8F4F7]/40">
-                          <Calendar size={11} className="text-zinc-400 transition-colors duration-500 group-hover/exp:text-[#367C8E]" />
+                        <div className="inline-flex items-center gap-1.5 font-mono text-[11px] font-semibold text-zinc-800 bg-[#E8F4F7]/40 border border-[#B2D8E2] px-2.5 py-1 rounded-full">
+                          <Calendar size={11} className="text-[#367C8E]" />
                           <span>{exp.duration}</span>
                         </div>
 
-                        <div className={`text-zinc-400 transition-transform duration-300 ${isExpanded ? 'rotate-180 text-[#367C8E]' : 'group-hover/exp:text-[#367C8E]'}`}>
+                        <div className={`text-zinc-400 transition-transform duration-300 ${isExpanded ? 'rotate-180 text-[#367C8E]' : 'group-hover/item:text-[#367C8E]'}`}>
                           <ChevronDown size={16} />
                         </div>
                       </div>
@@ -155,7 +151,7 @@ export default function ExperienceSection() {
                       Smoothly reveals the bullet points and tech pills on hover!
                     */}
                     <div 
-                      className={`overflow-hidden transition-all duration-500 ease-out ${
+                      className={`overflow-hidden transition-all duration-300 ease-out ${
                         isExpanded ? 'max-h-[380px] opacity-100 mt-4 pt-4 border-t border-zinc-100' : 'max-h-0 opacity-0'
                       }`}
                     >
@@ -163,7 +159,7 @@ export default function ExperienceSection() {
                       <ul className="space-y-2 mb-4">
                         {exp.bullets.map((bullet, bIdx) => (
                           <li key={bIdx} className="flex items-start gap-2 text-xs text-zinc-700 leading-relaxed">
-                            <span className="text-zinc-400 font-bold text-sm leading-none mt-0.5 shrink-0 transition-colors duration-500 group-hover/exp:text-[#367C8E]">
+                            <span className="text-[#367C8E] font-bold text-sm leading-none mt-0.5 shrink-0">
                               •
                             </span>
                             <span>{bullet}</span>
@@ -176,7 +172,7 @@ export default function ExperienceSection() {
                         {exp.skills.map((skill) => (
                           <span
                             key={skill}
-                            className="inline-flex items-center text-[10px] sm:text-[11px] font-medium text-zinc-700 bg-zinc-50 border border-zinc-200/70 px-2 py-0.5 rounded-md transition-all duration-500 group-hover/exp:border-[#B2D8E2] group-hover/exp:bg-[#E8F4F7]/40 group-hover/exp:text-[#367C8E]"
+                            className="inline-flex items-center text-[10px] sm:text-[11px] font-medium text-[#235B6A] bg-[#E8F4F7]/60 border border-[#B2D8E2] px-2 py-0.5 rounded-md"
                           >
                             {skill}
                           </span>

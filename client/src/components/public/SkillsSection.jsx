@@ -372,8 +372,13 @@ export default function SkillsSection() {
   const currentCategory = categories[activeIndex];
 
   return (
-    <section id="skills" className="group/skills relative py-20 sm:py-28 bg-[#FAFAFA] overflow-hidden select-none">
+    <section id="skills" className="relative py-20 sm:py-28 bg-[#FAFAFA] overflow-hidden select-none">
       
+      {/* Background shirt-matching teal ambient glow (colored by default) */}
+      <div
+        className="absolute top-[10%] right-[10%] w-[650px] h-[500px] rounded-full bg-[radial-gradient(circle,rgba(178,216,226,0.3)_0%,rgba(232,244,247,0.15)_50%,transparent_85%)] blur-[80px] pointer-events-none opacity-80 z-0"
+        aria-hidden="true"
+      />
 
       {/* Subtle bottom-left concentric arc motif */}
       <div className="absolute bottom-[-100px] left-[-60px] w-96 h-96 pointer-events-none opacity-40 z-0">
@@ -391,12 +396,12 @@ export default function SkillsSection() {
               type="button"
               onClick={handlePrev}
               aria-label="Previous skill"
-              className="text-zinc-400 hover:text-zinc-950 transition-colors cursor-pointer p-1 group-hover/skills:text-[#367C8E]"
+              className="text-[#367C8E] hover:text-[#235B6A] transition-colors cursor-pointer p-1"
             >
               <ChevronLeft size={18} strokeWidth={2.4} />
             </button>
 
-            <span className="font-mono text-xs font-semibold text-zinc-500 tracking-wider">
+            <span className="font-mono text-xs font-semibold text-zinc-600 tracking-wider">
               {activeIndex + 1} / {categories.length}
             </span>
 
@@ -404,7 +409,7 @@ export default function SkillsSection() {
               type="button"
               onClick={handleNext}
               aria-label="Next skill"
-              className="text-zinc-400 hover:text-zinc-950 transition-colors cursor-pointer p-1 group-hover/skills:text-[#367C8E]"
+              className="text-[#367C8E] hover:text-[#235B6A] transition-colors cursor-pointer p-1"
             >
               <ChevronRight size={18} strokeWidth={2.4} />
             </button>
@@ -435,11 +440,11 @@ export default function SkillsSection() {
             <div className="flex items-center gap-4 w-full max-w-[280px] mb-8">
               <div className="relative flex-1 h-[2px] bg-zinc-200 rounded-full overflow-hidden">
                 <div 
-                  className="absolute top-0 left-0 h-full bg-zinc-950 transition-all duration-500 ease-out group-hover/skills:bg-[#367C8E]"
+                  className="absolute top-0 left-0 h-full bg-[#367C8E] transition-all duration-500 ease-out"
                   style={{ width: `${((activeIndex + 1) / categories.length) * 100}%` }}
                 />
               </div>
-              <span className="font-mono text-xs font-semibold text-zinc-500 tracking-wider transition-colors duration-500 group-hover/skills:text-zinc-800">
+              <span className="font-mono text-xs font-bold text-[#367C8E] tracking-wider">
                 {currentCategory.number}
               </span>
             </div>
@@ -448,9 +453,9 @@ export default function SkillsSection() {
             <button
               type="button"
               onClick={handleNext}
-              className="group/btn inline-flex items-center gap-3 rounded-full border border-zinc-200 bg-white pl-2 pr-5 py-2 text-xs sm:text-sm font-medium text-zinc-800 shadow-sm transition-all duration-500 hover:border-zinc-950 hover:text-zinc-950 group-hover/skills:border-[#367C8E] group-hover/skills:text-[#367C8E] group-hover/skills:shadow-md cursor-pointer"
+              className="group/btn inline-flex items-center gap-3 rounded-full border border-[#367C8E] bg-[#E8F4F7]/40 pl-2 pr-5 py-2 text-xs sm:text-sm font-semibold text-[#367C8E] shadow-xs transition-all duration-300 hover:bg-[#367C8E] hover:text-white hover:shadow-md hover:shadow-[#367C8E]/20 cursor-pointer"
             >
-              <div className="w-6 h-6 rounded-full bg-zinc-950 text-white flex items-center justify-center transition-all duration-500 group-hover/skills:bg-[#367C8E] group-hover/btn:translate-x-0.5">
+              <div className="w-6 h-6 rounded-full bg-[#367C8E] text-white flex items-center justify-center transition-transform duration-300 group-hover/btn:translate-x-0.5">
                 <ArrowRight size={13} strokeWidth={2.4} />
               </div>
               <span>Swipe to see next skill</span>
@@ -490,14 +495,14 @@ export default function SkillsSection() {
                     }}
                     className={`absolute top-0 left-0 w-[270px] sm:w-[290px] lg:w-[305px] h-[440px] sm:h-[470px] bg-white rounded-3xl border p-5 sm:p-6 flex flex-col justify-between shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] transition-shadow duration-300 ${
                       diff === 0 
-                        ? 'border-zinc-200/90 shadow-[0_25px_60px_-10px_rgba(0,0,0,0.14)] cursor-default' 
-                        : 'border-zinc-200/70 hover:border-zinc-400 hover:shadow-lg cursor-pointer'
+                        ? 'border-[#367C8E]/50 shadow-[0_25px_60px_-10px_rgba(54,124,142,0.18)] cursor-default' 
+                        : 'border-[#B2D8E2]/60 hover:border-[#367C8E]/40 hover:shadow-lg cursor-pointer'
                     }`}
                   >
                     
                     {/* Top Row: Index number (e.g. 01 / 06) */}
                     <div className="flex justify-end items-center">
-                      <span className="font-mono text-[11px] font-semibold text-zinc-400">
+                      <span className="font-mono text-[11px] font-bold text-[#367C8E]">
                         {category.number}
                       </span>
                     </div>
@@ -506,17 +511,17 @@ export default function SkillsSection() {
                     <div className="flex flex-col items-center text-center mt-1">
                       
                       {/* Big Circle Icon Badge */}
-                      <div className="w-16 h-16 sm:w-18 sm:h-18 rounded-full bg-[#18181B] text-white flex items-center justify-center shadow-lg shadow-zinc-950/25 mb-3.5 transition-all duration-500 group-hover/skills:bg-[#367C8E] group-hover/skills:shadow-[#367C8E]/30 group-hover/skills:scale-105">
+                      <div className="w-16 h-16 sm:w-18 sm:h-18 rounded-full bg-[#367C8E] text-white flex items-center justify-center shadow-lg shadow-[#367C8E]/25 mb-3.5">
                         <CategoryHeroIcon id={category.id} />
                       </div>
 
                       {/* Card Category Title */}
-                      <h3 className="font-display font-bold text-base sm:text-lg text-zinc-950 tracking-tight mb-2 transition-colors duration-500 group-hover/skills:text-zinc-900">
+                      <h3 className="font-display font-bold text-base sm:text-lg text-zinc-950 tracking-tight mb-2">
                         {category.title}
                       </h3>
 
                       {/* Subtle Short Divider Line */}
-                      <div className="w-8 h-[1.5px] bg-zinc-200 rounded-full transition-colors duration-500 group-hover/skills:bg-[#367C8E]/40" />
+                      <div className="w-8 h-[1.5px] bg-[#367C8E]/40 rounded-full" />
                     </div>
 
                     {/* Skill Icons Grid: 3 columns x 2 rows matching reference mockup */}
@@ -534,7 +539,7 @@ export default function SkillsSection() {
                           </div>
 
                           {/* Skill Label */}
-                          <span className="text-[10px] sm:text-[11px] font-medium text-zinc-700 tracking-tight leading-tight px-0.5 transition-colors duration-500 group-hover/skills:text-zinc-900">
+                          <span className="text-[10px] sm:text-[11px] font-medium text-zinc-700 tracking-tight leading-tight px-0.5">
                             {skill.name}
                           </span>
 

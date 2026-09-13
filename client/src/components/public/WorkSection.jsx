@@ -33,11 +33,11 @@ export default function WorkSection() {
     : formattedProjects.filter((p) => p.category === activeFilter);
 
   return (
-    <section id="work" className="group/work relative py-12 sm:py-16 pb-20 bg-white overflow-hidden transition-colors duration-700">
+    <section id="work" className="relative py-12 sm:py-16 pb-20 bg-white overflow-hidden">
 
-      {/* Background shirt-matching teal ambient glow */}
+      {/* Background shirt-matching teal ambient glow (colored by default) */}
       <div
-        className="absolute top-[5%] left-1/2 -translate-x-1/2 w-[700px] h-[450px] rounded-full bg-[radial-gradient(circle,rgba(178,216,226,0.42)_0%,rgba(232,244,247,0.18)_50%,transparent_85%)] blur-[75px] pointer-events-none opacity-0 scale-90 transition-all duration-700 group-hover/work:opacity-100 group-hover/work:scale-100 z-0"
+        className="absolute top-[5%] left-1/2 -translate-x-1/2 w-[700px] h-[450px] rounded-full bg-[radial-gradient(circle,rgba(178,216,226,0.35)_0%,rgba(232,244,247,0.18)_50%,transparent_85%)] blur-[75px] pointer-events-none opacity-80 z-0"
         aria-hidden="true"
       />
 
@@ -62,8 +62,8 @@ export default function WorkSection() {
                 key={tab}
                 type="button"
                 className={`text-sm transition-colors py-1 cursor-pointer ${activeFilter === tab
-                    ? 'text-zinc-950 font-semibold group-hover/work:text-[#367C8E]'
-                    : 'text-zinc-500 font-medium hover:text-zinc-950'
+                    ? 'text-[#367C8E] font-bold border-b-2 border-[#367C8E]'
+                    : 'text-zinc-500 font-medium hover:text-[#367C8E]'
                   }`}
                 onClick={() => setActiveFilter(tab)}
               >
@@ -75,7 +75,7 @@ export default function WorkSection() {
           {/* View All Work Pill CTA */}
           <Link
             to="/projects"
-            className="group/all inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-5 py-2 text-xs sm:text-sm font-medium text-zinc-800 shadow-xs transition-all duration-500 hover:-translate-y-0.5 group-hover/work:border-[#367C8E] group-hover/work:text-[#367C8E] group-hover/work:shadow-md group-hover/work:shadow-[#367C8E]/15 hover:!bg-[#367C8E] hover:!text-white"
+            className="group/all inline-flex items-center gap-2 rounded-full border border-[#367C8E] bg-[#E8F4F7]/40 px-5 py-2 text-xs sm:text-sm font-semibold text-[#367C8E] shadow-xs transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#367C8E] hover:text-white hover:shadow-md hover:shadow-[#367C8E]/20"
           >
             <span>View All Work</span>
             <ArrowUpRight size={15} strokeWidth={2.4} className="transition-transform group-hover/all:translate-x-0.5 group-hover/all:-translate-y-0.5" />

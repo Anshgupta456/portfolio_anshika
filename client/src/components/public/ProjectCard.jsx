@@ -27,17 +27,17 @@ export default function ProjectCard({ project }) {
 
   return (
     <article
-      className={`group/card relative flex flex-col rounded-2xl p-5 sm:p-6 transition-all duration-500 hover:-translate-y-1.5 ${isDark
-          ? 'bg-[#0E0E10] text-white border border-zinc-800 shadow-xl shadow-black/20 group-hover/work:border-[#367C8E]/40 hover:!border-[#367C8E] hover:shadow-2xl hover:shadow-[#367C8E]/15'
-          : 'bg-white text-zinc-950 border border-zinc-200/90 shadow-sm group-hover/work:border-[#367C8E]/30 hover:!border-[#367C8E] hover:shadow-xl hover:shadow-[#367C8E]/10'
+      className={`group/card relative flex flex-col rounded-2xl p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1.5 ${isDark
+          ? 'bg-[#0E0E10] text-white border border-[#367C8E]/30 shadow-xl shadow-black/20 hover:border-[#367C8E]'
+          : 'bg-white text-zinc-950 border border-[#B2D8E2]/80 shadow-xs hover:border-[#367C8E] hover:shadow-md'
         }`}
     >
       <div className="flex flex-col h-full">
 
         {/* Top Header: Line meeting Number (─── 01) */}
         <div className="flex items-center gap-3 mb-3.5">
-          <div className={`h-[1px] flex-1 transition-colors duration-500 ${isDark ? 'bg-zinc-700 group-hover/work:bg-[#367C8E] group-hover/card:!bg-[#367C8E]' : 'bg-zinc-200 group-hover/work:bg-[#367C8E] group-hover/card:!bg-[#367C8E]'}`} />
-          <span className={`font-display text-3xl sm:text-4xl font-extrabold tracking-tight transition-colors duration-500 ${isDark ? 'text-white group-hover/work:text-[#B2D8E2] group-hover/card:!text-[#B2D8E2]' : 'text-zinc-950 group-hover/work:text-[#367C8E] group-hover/card:!text-[#367C8E]'}`}>
+          <div className={`h-[1px] flex-1 ${isDark ? 'bg-[#367C8E]/50' : 'bg-[#367C8E]/30'}`} />
+          <span className={`font-display text-3xl sm:text-4xl font-extrabold tracking-tight ${isDark ? 'text-[#B2D8E2]' : 'text-[#367C8E]'}`}>
             {number}
           </span>
         </div>
@@ -65,7 +65,7 @@ export default function ProjectCard({ project }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${title} Live Site`}
-                className={`p-1.5 rounded-full transition-colors ${isDark ? 'text-zinc-400 hover:text-[#B2D8E2] hover:bg-zinc-800' : 'text-zinc-500 hover:text-[#367C8E] hover:bg-zinc-100'}`}
+                className={`p-1.5 rounded-full transition-colors ${isDark ? 'text-[#B2D8E2] hover:text-white hover:bg-zinc-800' : 'text-[#367C8E] hover:text-[#235B6A] hover:bg-[#E8F4F7]'}`}
               >
                 <ExternalLink size={16} />
               </a>
@@ -83,9 +83,9 @@ export default function ProjectCard({ project }) {
           {tags.map((tag, idx) => (
             <span
               key={idx}
-              className={`px-2.5 py-1 rounded-[3px] text-[11px] font-medium tracking-tight transition-all duration-300 ${isDark
-                  ? 'bg-zinc-800 text-zinc-300 group-hover/work:bg-[#367C8E] group-hover/work:text-white group-hover/card:!bg-[#367C8E]'
-                  : 'bg-zinc-50 border border-zinc-200 text-zinc-700 group-hover/work:border-[#B2D8E2] group-hover/work:text-[#235B6A] group-hover/card:!border-[#367C8E]'
+              className={`px-2.5 py-1 rounded-[3px] text-[11px] font-medium tracking-tight ${isDark
+                  ? 'bg-zinc-800/90 text-[#B2D8E2] border border-zinc-700/60'
+                  : 'bg-[#E8F4F7] border border-[#B2D8E2] text-[#235B6A]'
                 }`}
             >
               {tag}
@@ -103,13 +103,13 @@ export default function ProjectCard({ project }) {
 
           {/* Vertical Badge in Top-Left */}
           <div className="absolute top-3 left-3 z-30 flex items-center justify-center">
-            <span className="inline-flex items-center justify-center bg-zinc-900 text-white font-display text-[10px] font-bold tracking-wider uppercase px-2 py-3 rounded-full [writing-mode:vertical-lr] rotate-180 shadow-sm transition-colors duration-500 group-hover/work:bg-[#367C8E] group-hover/card:!bg-[#367C8E]">
+            <span className="inline-flex items-center justify-center bg-[#367C8E] text-white font-display text-[10px] font-bold tracking-wider uppercase px-2 py-3 rounded-full [writing-mode:vertical-lr] rotate-180 shadow-sm">
               {verticalBadge}
             </span>
           </div>
 
           {/* Hover Action Circle (Subtle ↗ button) */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/95 text-zinc-950 flex items-center justify-center shadow-xl opacity-0 scale-75 group-hover/card:opacity-100 group-hover/card:scale-100 group-hover/card:text-[#367C8E] transition-all duration-300 pointer-events-none z-30" aria-hidden="true">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/95 text-[#367C8E] flex items-center justify-center shadow-xl opacity-0 scale-75 group-hover/card:opacity-100 group-hover/card:scale-100 transition-all duration-300 pointer-events-none z-30" aria-hidden="true">
             <ArrowUpRight size={18} strokeWidth={2.4} />
           </div>
 

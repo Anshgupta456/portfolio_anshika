@@ -49,13 +49,13 @@ export default function SectionHeading({
 
   const currentAlign = alignStyles[align] || alignStyles.center;
 
-  // Theme variant styles: B&W by default, transforms to teal on section hover
+  // Theme variant styles: colored by default with signature teal accents
   const themeStyles = {
     color: {
-      slash: 'text-zinc-900 transition-colors duration-500 group-hover:text-[#367C8E]',
-      watermark: 'text-[#F1F1EF] transition-colors duration-700 group-hover:text-[#E8F4F7]',
+      slash: 'text-[#367C8E]',
+      watermark: 'text-[#E8F4F7]',
       title: 'text-zinc-950',
-      subtitle: 'text-zinc-500 transition-colors duration-500 group-hover:text-zinc-700'
+      subtitle: 'text-zinc-600'
     },
     bnw: {
       slash: 'text-zinc-900',
@@ -73,7 +73,7 @@ export default function SectionHeading({
       {/* Background Watermark */}
       {watermark && (
         <span
-          className={`absolute top-1/2 -translate-y-[58%] font-display text-[clamp(3.8rem,9.5vw,7.8rem)] font-extrabold tracking-widest uppercase select-none pointer-events-none z-0 whitespace-nowrap leading-none transition-colors duration-500 ${currentAlign.watermark} ${currentTheme.watermark}`}
+          className={`absolute top-1/2 -translate-y-[58%] font-display text-[clamp(3.8rem,9.5vw,7.8rem)] font-extrabold tracking-widest uppercase select-none pointer-events-none z-0 whitespace-nowrap leading-none ${currentAlign.watermark} ${currentTheme.watermark}`}
           aria-hidden="true"
         >
           {watermark}
@@ -83,7 +83,7 @@ export default function SectionHeading({
       {/* Foreground Heading: /TITLE */}
       <Component className={`relative z-10 font-display text-[clamp(1.9rem,3.8vw,2.75rem)] font-extrabold tracking-tight m-0 leading-tight ${currentTheme.title}`}>
         <span 
-          className={`inline-block mr-1 font-bold transition-all duration-300 ${currentTheme.slash}`}
+          className={`inline-block mr-1 font-bold ${currentTheme.slash}`}
           aria-hidden="true"
         >
           /

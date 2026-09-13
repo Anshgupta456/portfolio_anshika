@@ -1,11 +1,11 @@
-import { useState, useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ArrowUpRight, Menu, X, Code2 } from 'lucide-react';
+import { ArrowUpRight, Menu, X } from 'lucide-react';
 import { usePortfolio } from '../../context/PortfolioContext';
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState('work');
+  const [activeTab, setActiveTab] = useState('');
   const { profile } = usePortfolio();
   const location = useLocation();
   const isHomePage = location.pathname === '/';
@@ -19,24 +19,57 @@ export default function Navbar() {
     { id: 'contact', label: 'Contact', href: isHomePage ? '#contact' : '/#contact' },
   ], [isHomePage]);
 
+  // Scroll spy to highlight active section only when scrolled to it (not on hero/homepage by default)
+  useEffect(() => {
+    if (!isHomePage) {
+      setActiveTab('');
+      return;
+    }
+
+    const handleScroll = () => {
+      // If user is at top of page / hero section, no section nav link should be highlighted
+      if (window.scrollY < 320) {
+        setActiveTab('');
+        return;
+      }
+
+      const scrollPosition = window.scrollY + 180;
+      const sectionIds = ['contact', 'experience', 'skills', 'work', 'education', 'about'];
+
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (el) {
+          const top = el.offsetTop;
+          if (scrollPosition >= top) {
+            setActiveTab(id);
+            return;
+          }
+        }
+      }
+
+      setActiveTab('');
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // Initial evaluation
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isHomePage]);
+
   return (
     <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-zinc-100 transition-colors">
       <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12">
         <div className="flex items-center justify-between h-20">
 
-          {/* Logo / Brand & Status */}
+          {/* Brand & Status */}
           <div className="flex items-center gap-3">
-            <Link to="/" className="flex items-center gap-2.5 group/brand">
-              <div className="w-9 h-9 rounded-xl bg-zinc-950 text-white flex items-center justify-center font-mono font-bold text-xs tracking-wider group-hover/brand:bg-[#367C8E] transition-colors shadow-xs">
-                &lt;/&gt;
-              </div>
-              <span className="font-display font-bold text-base tracking-tight text-zinc-950 group-hover/brand:text-[#367C8E] transition-colors">
+            <Link to="/" className="group/brand py-1">
+              <span className="font-display font-bold text-lg tracking-tight text-zinc-950 hover:text-[#367C8E] transition-colors">
                 {profile?.name || 'Anshika Gupta'}
               </span>
             </Link>
 
-            <div className="group/status hidden xl:inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-zinc-200 bg-white shadow-xs hover:border-[#B2D8E2] transition-all">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 ring-4 ring-emerald-500/20 group-hover/status:bg-[#367C8E] group-hover/status:ring-[#367C8E]/25 transition-all duration-300"></span>
+            <div className="group/status hidden xl:inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#B2D8E2] bg-[#E8F4F7]/40 shadow-xs">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 ring-4 ring-emerald-500/20"></span>
               <span className="text-[11px] font-medium text-zinc-800 tracking-tight">Available for full-time opportunities</span>
             </div>
           </div>
@@ -47,10 +80,14 @@ export default function Navbar() {
               <a
                 key={link.id}
                 href={link.href}
-                className="group/link inline-flex items-center text-sm font-medium transition-colors"
+                className="group/link inline-flex items-center text-sm font-medium py-1 transition-colors"
                 onClick={() => setActiveTab(link.id)}
               >
-                <span className={`transition-colors ${activeTab === link.id ? 'text-zinc-950 font-semibold' : 'text-zinc-800 group-hover/link:text-[#367C8E]'}`}>
+                <span className={`transition-all ${
+                  activeTab === link.id 
+                    ? 'text-[#367C8E] font-bold border-b-2 border-[#367C8E] pb-0.5' 
+                    : 'text-zinc-600 hover:text-[#367C8E]'
+                }`}>
                   {link.label}
                 </span>
               </a>
@@ -61,7 +98,7 @@ export default function Navbar() {
           <div className="flex items-center gap-3.5">
             <a
               href={isHomePage ? '#contact' : '/#contact'}
-              className="inline-flex items-center gap-2 rounded-full bg-zinc-950 px-5 py-2.5 text-sm font-medium text-white shadow-xs hover:bg-[#367C8E] transition-all duration-300 group/btn"
+              className="inline-flex items-center gap-2 rounded-full bg-[#367C8E] hover:bg-[#235B6A] px-5 py-2.5 text-sm font-semibold text-white shadow-xs shadow-[#367C8E]/25 transition-all duration-300 group/btn"
             >
               <span>Let's Talk</span>
               <ArrowUpRight size={15} strokeWidth={2.4} className="transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
@@ -84,7 +121,7 @@ export default function Navbar() {
       {/* Mobile Menu Dropdown */}
       {isMobileMenuOpen && (
         <div className="flex md:hidden flex-col gap-4 bg-white border-b border-zinc-200 px-6 py-5">
-          <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-zinc-200 w-fit bg-zinc-50">
+          <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-[#B2D8E2] w-fit bg-[#E8F4F7]/40">
             <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
             <span className="text-xs text-zinc-700">Available for New Opportunities</span>
           </div>
@@ -100,14 +137,16 @@ export default function Navbar() {
                   setIsMobileMenuOpen(false);
                 }}
               >
-                <span>{link.label}</span>
+                <span className={activeTab === link.id ? 'text-[#367C8E] font-bold' : 'text-zinc-800'}>
+                  {link.label}
+                </span>
               </a>
             ))}
           </div>
 
           <a
             href={isHomePage ? '#contact' : '/#contact'}
-            className="flex items-center justify-center gap-2 rounded-full bg-zinc-950 px-5 py-3 text-sm font-medium text-white hover:bg-[#367C8E]"
+            className="flex items-center justify-center gap-2 rounded-full bg-[#367C8E] hover:bg-[#235B6A] px-5 py-3 text-sm font-semibold text-white shadow-xs shadow-[#367C8E]/25"
             onClick={() => setIsMobileMenuOpen(false)}
           >
             <span>Let's Talk</span>

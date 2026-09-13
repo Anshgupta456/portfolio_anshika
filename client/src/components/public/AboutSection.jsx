@@ -30,11 +30,11 @@ export default function AboutSection() {
       ];
 
   return (
-    <section id="about" className="group/about relative py-20 sm:py-28 bg-white overflow-hidden transition-colors duration-700">
-      
-      {/* Background shirt-matching teal ambient glow */}
+    <section id="about" className="relative py-20 sm:py-28 bg-white overflow-hidden">
+
+      {/* Background shirt-matching teal ambient glow (colored by default) */}
       <div 
-        className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[800px] h-[500px] rounded-full bg-[radial-gradient(circle,rgba(178,216,226,0.35)_0%,rgba(232,244,247,0.18)_50%,transparent_85%)] blur-[90px] pointer-events-none opacity-0 scale-90 transition-all duration-700 group-hover/about:opacity-100 group-hover/about:scale-100 z-0" 
+        className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[800px] h-[500px] rounded-full bg-[radial-gradient(circle,rgba(178,216,226,0.35)_0%,rgba(232,244,247,0.18)_50%,transparent_85%)] blur-[90px] pointer-events-none opacity-80 z-0" 
         aria-hidden="true" 
       />
 
@@ -73,7 +73,7 @@ export default function AboutSection() {
           />
 
           {/* Single Rectangular Box with 3 Columns separated by vertical lines */}
-          <div className="bg-[#FAFAFA] border border-zinc-200/90 rounded-3xl overflow-hidden shadow-xs transition-all duration-500 group-hover/about:border-[#367C8E]/40 group-hover/about:shadow-md">
+          <div className="bg-[#FAFAFA] border border-[#B2D8E2]/80 rounded-3xl overflow-hidden shadow-xs">
             <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-zinc-200/90">
               {educationList.map((item) => (
                 <div 
@@ -83,10 +83,10 @@ export default function AboutSection() {
                   <div>
                     {/* Category Label & Duration */}
                     <div className="flex items-center justify-between gap-2 mb-4">
-                      <span className="font-mono text-xs font-bold uppercase tracking-wider text-zinc-500 transition-colors duration-500 group-hover/about:text-[#367C8E]">
+                      <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#367C8E]">
                         {item.category}
                       </span>
-                      <span className="font-mono text-xs text-zinc-500 bg-white border border-zinc-200 px-2.5 py-0.5 rounded-full transition-colors duration-500 group-hover/about:border-[#B2D8E2] group-hover/about:text-[#367C8E]">
+                      <span className="font-mono text-xs font-semibold text-[#367C8E] bg-[#E8F4F7]/70 border border-[#B2D8E2] px-2.5 py-0.5 rounded-full">
                         {item.duration}
                       </span>
                     </div>
@@ -113,8 +113,8 @@ export default function AboutSection() {
                     <span className="text-xs text-zinc-400 font-mono uppercase tracking-wider">
                       Grade / Score
                     </span>
-                    <span className="inline-flex items-center gap-1.5 font-mono text-xs font-bold text-zinc-900 bg-white border border-zinc-200 px-3 py-1 rounded-md shadow-2xs transition-all duration-500 group-hover/about:border-[#B2D8E2] group-hover/about:bg-[#E8F4F7]/40">
-                      <Award size={13} className="text-zinc-400 transition-colors duration-500 group-hover/about:text-[#367C8E]" />
+                    <span className="inline-flex items-center gap-1.5 font-mono text-xs font-bold text-zinc-900 bg-[#E8F4F7]/60 border border-[#B2D8E2] px-3 py-1 rounded-md shadow-2xs">
+                      <Award size={13} className="text-[#367C8E]" />
                       {item.score}
                     </span>
                   </div>
