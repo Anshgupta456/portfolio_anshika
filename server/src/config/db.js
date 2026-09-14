@@ -17,7 +17,9 @@ const connectDB = async () => {
   }
 
   try {
-    const conn = await mongoose.connect(uri);
+    const conn = await mongoose.connect(uri, {
+      serverSelectionTimeoutMS: 5000
+    });
     console.log(`✅ MongoDB Connected: ${conn.connection.host}`);
     
     // Auto-seed if database has empty collections
@@ -25,6 +27,8 @@ const connectDB = async () => {
     await autoSeedIfEmpty();
   } catch (error) {
     console.error(`❌ MongoDB connection error: ${error.message}`);
+    console.log('🔄 Will retry MongoDB connection in 5 seconds...');
+    setTimeout(connectDB, 5000);
   }
 };
 
