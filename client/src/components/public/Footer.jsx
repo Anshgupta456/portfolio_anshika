@@ -42,11 +42,11 @@ export default function Footer() {
                 Navigation
               </span>
               <a href="#hero" className="text-sm text-zinc-600 hover:text-zinc-950 transition-colors">Home</a>
+              <a href="#projects" className="text-sm text-zinc-600 hover:text-zinc-950 transition-colors">Projects</a>
               <a href="#about" className="text-sm text-zinc-600 hover:text-zinc-950 transition-colors">About</a>
-              <a href="#education" className="text-sm text-zinc-600 hover:text-zinc-950 transition-colors">Education</a>
-              <a href="#work" className="text-sm text-zinc-600 hover:text-zinc-950 transition-colors">Projects</a>
-              <a href="#skills" className="text-sm text-zinc-600 hover:text-zinc-950 transition-colors">Skills</a>
               <a href="#experience" className="text-sm text-zinc-600 hover:text-zinc-950 transition-colors">Experience</a>
+              <a href="#skills" className="text-sm text-zinc-600 hover:text-zinc-950 transition-colors">Skills</a>
+              <a href="#contact" className="text-sm text-zinc-600 hover:text-zinc-950 transition-colors">Contact</a>
             </div>
 
             <div className="flex flex-col gap-3">

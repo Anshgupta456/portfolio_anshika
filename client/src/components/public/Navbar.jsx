@@ -11,11 +11,10 @@ export default function Navbar() {
   const isHomePage = location.pathname === '/';
 
   const navLinks = useMemo(() => [
+    { id: 'projects', label: 'Projects', href: isHomePage ? '#projects' : '/#projects' },
     { id: 'about', label: 'About', href: isHomePage ? '#about' : '/#about' },
-    { id: 'education', label: 'Education', href: isHomePage ? '#education' : '/#education' },
-    { id: 'work', label: 'Work', href: isHomePage ? '#work' : '/#work' },
-    { id: 'skills', label: 'Skills', href: isHomePage ? '#skills' : '/#skills' },
     { id: 'experience', label: 'Experience', href: isHomePage ? '#experience' : '/#experience' },
+    { id: 'skills', label: 'Skills', href: isHomePage ? '#skills' : '/#skills' },
     { id: 'contact', label: 'Contact', href: isHomePage ? '#contact' : '/#contact' },
   ], [isHomePage]);
 
@@ -34,14 +33,18 @@ export default function Navbar() {
       }
 
       const scrollPosition = window.scrollY + 180;
-      const sectionIds = ['contact', 'experience', 'skills', 'work', 'education', 'about'];
+      // Checked from bottom to top according to page order:
+      // Hero -> Projects -> About (About & Education) -> Experience -> Skills -> Contact
+      const sectionIds = ['contact', 'skills', 'experience', 'education', 'about', 'projects', 'work'];
 
       for (const id of sectionIds) {
         const el = document.getElementById(id);
         if (el) {
           const top = el.offsetTop;
           if (scrollPosition >= top) {
-            setActiveTab(id);
+            // Map education to about, and work to projects
+            const mappedId = id === 'education' ? 'about' : (id === 'work' ? 'projects' : id);
+            setActiveTab(mappedId);
             return;
           }
         }

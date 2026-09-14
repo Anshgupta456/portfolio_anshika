@@ -18,11 +18,8 @@ export default function Home() {
         {/* Hero Section */}
         <HeroSection />
 
-        {/* Selected Work Section */}
+        {/* Projects Section */}
         <WorkSection />
-
-        {/* Technical Skills Section */}
-        <SkillsSection />
 
         {/* About & Education Section */}
         <AboutSection />
@@ -30,7 +27,10 @@ export default function Home() {
         {/* Work Experience Section */}
         <ExperienceSection />
 
-        {/* Contact Details Section (No Form) */}
+        {/* Technical Skills Section */}
+        <SkillsSection />
+
+        {/* Contact Details Section */}
         <ContactSection />
       </main>
 

@@ -33,7 +33,9 @@ export default function WorkSection() {
     : formattedProjects.filter((p) => p.category === activeFilter);
 
   return (
-    <section id="work" className="relative py-12 sm:py-16 pb-20 bg-white overflow-hidden">
+    <section id="projects" className="relative py-12 sm:py-16 pb-20 bg-white overflow-hidden scroll-mt-20">
+      {/* Invisible anchor for backward compatibility */}
+      <span id="work" className="sr-only" aria-hidden="true" />
 
       {/* Background shirt-matching teal ambient glow (colored by default) */}
       <div
@@ -45,8 +47,8 @@ export default function WorkSection() {
 
         {/* Section Header with Faint Background Watermark */}
         <SectionHeading
-          watermark="PORTFOLIO"
-          title="SELECTED WORK"
+          watermark="PROJECTS"
+          title="FEATURED PROJECTS"
           variant="color"
           align="center"
           className="mb-6"
