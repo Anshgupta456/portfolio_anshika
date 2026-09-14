@@ -1,6 +1,13 @@
+const path = require('path');
 const express = require('express');
 const cors = require('cors');
-require('dotenv').config();
+
+// Explicitly resolve .env path so PM2 loads it regardless of execution cwd
+require('dotenv').config({ path: path.resolve(__dirname, '.env') });
+// Also check parent directory if not found in server directory
+if (!process.env.MONGO_URI) {
+  require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
+}
 
 const connectDB = require('./src/config/db');
 const { notFound, errorHandler } = require('./src/middleware/errorMiddleware');
@@ -24,7 +31,21 @@ connectDB();
 
 // Middleware
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:5173',
+  origin: (origin, callback) => {
+    // Allow requests with no origin (curl, same-origin, health checks) or any valid origin
+    const allowed = [
+      'https://anshikagupta.online',
+      'http://anshikagupta.online',
+      'http://localhost:5173',
+      'http://localhost:5000',
+      process.env.CLIENT_URL
+    ].filter(Boolean);
+
+    if (!origin || allowed.includes(origin) || process.env.NODE_ENV !== 'production') {
+      return callback(null, true);
+    }
+    return callback(null, true); // Permissive CORS for portfolio admin
+  },
   credentials: true
 }));
 const path = require('path');
@@ -34,9 +55,13 @@ app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Health check endpoint
+const mongoose = require('mongoose');
 app.get('/api/v1/health', (req, res) => {
+  const states = ['disconnected', 'connected', 'connecting', 'disconnecting'];
+  const dbState = states[mongoose.connection.readyState] || 'unknown';
   res.json({
-    status: 'online',
+    status: dbState === 'connected' ? 'online' : 'degraded',
+    database: dbState,
     service: 'Anshika Gupta Portfolio & Admin API',
     timestamp: new Date().toISOString()
   });

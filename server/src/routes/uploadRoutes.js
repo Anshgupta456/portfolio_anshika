@@ -24,51 +24,61 @@ router.post('/', protect, upload.single('file'), (req, res) => {
     return res.status(400).json({ message: 'No file provided' });
   }
 
-  // Determine resource type: 'raw' for PDF documents, 'auto' / 'image' for images
+  // Determine resource type: use 'auto' so Cloudinary detects images and documents
   const isPdf = req.file.mimetype === 'application/pdf';
-  const resourceType = isPdf ? 'raw' : 'auto';
   const cleanOriginalName = req.file.originalname.replace(/[^a-zA-Z0-9.-]/g, '_');
   const safeFileName = `${Date.now()}-${cleanOriginalName}`;
 
-  // If PDF, persist locally so it can always be downloaded/viewed
-  // without being blocked by Cloudinary's default raw/PDF ACL restrictions
+  // Always persist locally in server/uploads so the file is guaranteed to be available
   let localFileUrl = null;
-  if (isPdf) {
-    try {
-      const targetPath = path.join(uploadsDir, safeFileName);
-      fs.writeFileSync(targetPath, req.file.buffer);
-      // Also save to client/public/uploads for direct static serving
+  try {
+    const targetPath = path.join(uploadsDir, safeFileName);
+    fs.writeFileSync(targetPath, req.file.buffer);
+    localFileUrl = `/uploads/${safeFileName}`;
+    
+    // Also save to client/public/uploads if it exists
+    if (fs.existsSync(clientPublicUploadsDir)) {
       const clientPath = path.join(clientPublicUploadsDir, safeFileName);
       fs.writeFileSync(clientPath, req.file.buffer);
-      localFileUrl = `/uploads/${safeFileName}`;
-    } catch (fsErr) {
-      console.warn('Could not save local PDF copy:', fsErr.message);
     }
+  } catch (fsErr) {
+    console.warn('Could not save local copy:', fsErr.message);
+  }
+
+  // If Cloudinary credentials are not configured, return the local file URL directly
+  if (!process.env.CLOUDINARY_CLOUD_NAME || !process.env.CLOUDINARY_API_KEY) {
+    if (localFileUrl) {
+      return res.status(200).json({
+        url: localFileUrl,
+        public_id: safeFileName,
+        bytes: req.file.size
+      });
+    }
+    return res.status(500).json({ message: 'Upload service not configured and local storage failed' });
   }
 
   const uploadStream = cloudinary.uploader.upload_stream(
     {
       folder: 'anshika-portfolio',
-      resource_type: resourceType,
+      resource_type: 'auto',
       public_id: safeFileName
     },
     (error, result) => {
-      // If Cloudinary errors out but local PDF succeeded, return local URL
-      if (error && localFileUrl) {
-        return res.status(200).json({
-          url: localFileUrl,
-          public_id: safeFileName,
-          bytes: req.file.size
-        });
-      }
-
+      // If Cloudinary errors out but local copy succeeded, fallback to local URL
       if (error) {
-        console.error('Cloudinary upload error:', error);
+        console.warn('Cloudinary upload warning:', error.message);
+        if (localFileUrl) {
+          return res.status(200).json({
+            url: localFileUrl,
+            public_id: safeFileName,
+            bytes: req.file.size
+          });
+        }
         return res.status(500).json({ message: 'Upload failed: ' + error.message });
       }
 
-      // For PDFs, use the reliable local/proxied route so browser PDF viewer never fails with 401 ACL error
-      const finalUrl = isPdf && localFileUrl ? localFileUrl : result.secure_url;
+      // If successful, return Cloudinary URL (or local if prefered for raw PDFs)
+      const finalUrl = result.secure_url || localFileUrl;
 
       res.status(200).json({
         url: finalUrl,
