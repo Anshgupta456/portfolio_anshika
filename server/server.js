@@ -48,7 +48,7 @@ app.use(cors({
   },
   credentials: true
 }));
-const path = require('path');
+
 app.use(express.json());
 
 // Serve static uploads
